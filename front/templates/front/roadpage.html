@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class = "col-md-2">
+        <p> <a href="/productpage">All</a> </p>
+        {% for subcategory in subcategory %}
+
+        <p>
+            <a href="/productcategory/{{subcategory.id}}">
+            {{subcategory.category_name}} -
+            {{subcategory.subcategory_name}}
+            </a>
+        </p>
+
+        {% endfor %}
+    </div>
+    <div class = "col-md-10">
+        <div class="row">
+    {% for product in products %}
+    <div class="col-md-3">
+        <div class="card" style="width:100%;">
+                 <img src="{{product.image.url}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title">{{product.title}}</h5>
+                  <p class="card-text">{{product.description}}</p>
+                  <p class="card-text"><b>{{product.price}}</b></p>
+                  <p class="card-text">{{product.discount}}</p>
+                  <a href="/productdetails/{{product.id}}" class="btn btn-primary">View Details</a>
+             </div>
+        </div>
+    </div>
+    {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

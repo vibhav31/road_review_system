@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+{% if not billing_profile %}
+<div class="row ">
+     <div class="col-md-6">
+         <h1>Login</h1>
+         <form method="POST" action="/login" >
+             {% csrf_token %}
+             {{loginform.as_p}}
+             <input type="hidden" value="{{next_url}}" name="next">
+             <input type="submit" value="Login">
+
+
+         </form>
+     </div>
+     <div class="col-md-6">
+         <h1>Guest Login</h1>
+         <form method="POST" action="/guest_register" >
+             {% csrf_token %}
+             {{guestform.as_p}}
+             <input type="hidden" value="{{next_url}}" name="next">
+             <input type="submit" value="Login">
+
+
+         </form>
+
+     </div>
+</div>
+
+
+{% endif %}
+{% endblock %}

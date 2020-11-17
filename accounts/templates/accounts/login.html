@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div style="box-shadow:10px 10px 10px #aaa; padding: 50px;">
+            <h1>Login Form</h1>
+            <form method='post'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-success btn-large"  value="login"style="background:white;color:black;">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

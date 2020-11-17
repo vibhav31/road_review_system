@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div calss="row">
+    <div class="col-md-12">
+        <h1>Road Details</h1>
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-4 col-xs-12">
+        <div style="padding-left:20px;">
+        <img src="{{road.image.url}}"width="100%">
+        </div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <p>
+            Title : {{road.title}}<br>
+            Description :  {{road.description}}<br>
+            Price:{{road.tender_price}}<br>
+            Discount:{{road.quality}}<br>
+        </p>
+        <form method="POST" action="/cart/cartupdate/">
+          {% csrf_token %}
+            <input type="hidden" name="road_id" value="{{road.id}}">
+            {% if road in cart.roads.all %}
+            <div class="btn-group">
+                <button class="btn btn-success"style="margin-right:20px; background:#aaa"><a href="/cart/">
+                    In Cart
+                </a>
+                </button>
+                <button type="submit" class="btn btn-danger">Remove?</button>
+            </div>
+
+            {% else %}
+            <button class="btn btn-success" type="submit">Add To Cart</button>
+            {% endif %}
+        </form>
+
+    </div>
+    <div class="col-md-4 col-xs-12" style="padding-right:30px;">
+        <form method ="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Review" class="btn btn-danger">
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <hr>
+        <h3> Road Reviews</h3>
+        <div style="border: 1px solid #aaa;">
+        </div>
+        {% for review in reviews %}
+        <blockquote class = "blockquote text-right">
+<p class = "mb-0"> {{review.description}}.</p>
+            <footer class = "blockquotes-footer"> <cite title = "{{review.reviewedby}}">{{review.reviewedby}}</cite>
+            </footer>
+        </blockquote>
+        {% endfor %}
+        <div class="pagination">
+        <span class = "stap-link">
+            {% if reviews.has_previous %}
+            <a href="?page=1"> First </a>
+            <a href="?page={{reviews.previous_page_number}}"> &lt; &lt; Previous </a>
+            {% endif %}
+            <span class="current">Page {{reviews.number}} of {{reviews.paginator.num_pages}}</span>
+            {% if reviews.has_next %}
+            <a href="?page= {{reviews.next_page_number}}"> Next &gt; &gt; </a>
+            <a href ="?page= {{reviews.paginator.num_pages}}"> Last </a>
+            {% endif %}
+        </span>
+        </div>
+    </div>
+</div>
+{% endblock %}
