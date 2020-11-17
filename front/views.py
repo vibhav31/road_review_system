@@ -4,7 +4,6 @@ from road.models import Road,Review,SubCategory
 from django.http import HttpResponse
 from road.forms import ReviewForm
 from django.core.paginator import Paginator
-from cart.models import Cart
 
 # Create your views here.
 
@@ -39,14 +38,14 @@ def roaddetails(request,id):
         paginator = Paginator(reviews_list,11)
         page = request.GET.get('page')
         reviews = paginator.get_page(page)
-     #cart part is left
-        cart_obj, new_obj = Cart.objects.new_or_get(request)
+
+        #cart_obj, new_obj = Cart.objects.new_or_get(request)
 
         context={'title':'roaddetails',
                  'road':road,
                  'form':form,
                  'reviews': reviews,
-                 'cart':cart_obj ,
+                 #'cart':cart_obj ,
                  }
         return render(request,'front/roaddetails.html',context)
 
