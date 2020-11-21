@@ -47,9 +47,17 @@ class Road(models.Model):
 
     def __str__(self):
         return self.title
+QUALITY = (('Excellent', 'Excellent'), ('Good', 'Good'), ('Bad', 'Bad'))
+TRAFFIC = (('Heavy', 'Heavy'), ('Normal', 'Normal'))
+TRANSPORTATION = (('Available','Available'),('Not Available','Not Available'))
 class Review(models.Model):
+
+
     reviewedby = models.EmailField(max_length=50)
     roadid  = models.IntegerField()
+    quality_of_road = models.CharField(max_length=10,choices=QUALITY)
+    traffic_on_road = models.CharField(max_length=10,choices=TRAFFIC)
+    public_transport = models.CharField(max_length=20,choices=TRANSPORTATION)
     description = models.TextField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

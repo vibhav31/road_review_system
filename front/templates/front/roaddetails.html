@@ -17,25 +17,9 @@
         <p>
             Title : {{road.title}}<br>
             Description :  {{road.description}}<br>
-            Price:{{road.tender_price}}<br>
-            Discount:{{road.quality}}<br>
-        </p>
-        <form method="POST" action="/cart/cartupdate/">
-          {% csrf_token %}
-            <input type="hidden" name="road_id" value="{{road.id}}">
-            {% if road in cart.roads.all %}
-            <div class="btn-group">
-                <button class="btn btn-success"style="margin-right:20px; background:#aaa"><a href="/cart/">
-                    In Cart
-                </a>
-                </button>
-                <button type="submit" class="btn btn-danger">Remove?</button>
-            </div>
+            Tender_amount:{{road.tender_amount}}<br>
+            Quality:{{road.quality}}<br>
 
-            {% else %}
-            <button class="btn btn-success" type="submit">Add To Cart</button>
-            {% endif %}
-        </form>
 
     </div>
     <div class="col-md-4 col-xs-12" style="padding-right:30px;">

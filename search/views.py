@@ -10,7 +10,7 @@ def search(request):
 
     if query is not None:
         lookups = (Q (description__icontains = query) |
-                   Q (brand_name__brand_name__icontains = query) |
+                   Q (type_name__type_name__icontains = query) |
                    Q (title__icontains = query))
         road = Road.objects.filter(lookups , active=True).distinct
         context = { 'roads':road, 'subcategory':subcategory}
